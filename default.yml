@@ -10,6 +10,8 @@ matches:
   # Simple text replacement
   - trigger: ":espanso"
     replace: "Hi there!"
+  - trigger: ":email"
+    replace: "Hej $|$,\n\n\n\nCheers,\nIñigo"
 
   # Dates
   - trigger: ":date"
@@ -18,7 +20,7 @@ matches:
       - name: mydate
         type: date
         params:
-          format: "%m/%d/%Y"
+          format: "%Y%m%d"
 
   # Shell commands
   - trigger: ":shell"
@@ -28,3 +30,20 @@ matches:
         type: shell
         params:
           cmd: "echo Hello from your shell"
+
+  # Forms
+  - trigger: ":greet"
+    form: |
+      Hey {{name}},
+      Happy Birthday!
+  
+  # Script Extension
+  - trigger: ":pyscript"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: script
+        params:
+          args:
+            - python
+            - "%CONFIG%/scripts/test.py"
